@@ -95,7 +95,19 @@ After extracting the ZIP:
 
 ## Application Snapshots
 
-The tester flow is documented with terminal snapshots in [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md).
+The tester flow is documented below and in [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md).
+
+| Home | File and output selection |
+| --- | --- |
+| ![AudioStemLab home screen](docs/screenshots/01-home.svg) | ![AudioStemLab file and output selection](docs/screenshots/02-file-and-output-selection.svg) |
+
+| Separation options | Processing progress |
+| --- | --- |
+| ![AudioStemLab separation options](docs/screenshots/03-separation-options.svg) | ![AudioStemLab processing progress](docs/screenshots/04-processing-progress.svg) |
+
+| Release packages |
+| --- |
+| ![AudioStemLab release packages](docs/screenshots/05-release-packages.svg) |
 
 ## Separation Modes
 
