@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.3.4-0f766e?style=for-the-badge">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.3.5-0f766e?style=for-the-badge">
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%20%7C%203.11-1f2937?style=for-the-badge&logo=python&logoColor=white">
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-334155?style=for-the-badge">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-111827?style=for-the-badge">
@@ -39,7 +39,7 @@ The project prioritizes:
 
 | Item | Status |
 | --- | --- |
-| Current version | `0.3.4` |
+| Current version | `0.3.5` |
 | Interface | Assisted terminal |
 | Target platforms | Linux, Windows, and macOS |
 | Mobile | Not available yet |
@@ -53,14 +53,24 @@ End users should download the ready-to-run package for their operating system fr
 The release packages are generated as:
 
 ```text
-AudioStemLab-v0.3.4-linux.zip
-AudioStemLab-v0.3.4-windows.zip
-AudioStemLab-v0.3.4-macos.zip
+AudioStemLab-v0.3.5-linux-cpu.zip
+AudioStemLab-v0.3.5-windows-cpu.zip
+AudioStemLab-v0.3.5-macos-cpu.zip
+AudioStemLab-v0.3.5-linux-cuda.zip
+AudioStemLab-v0.3.5-windows-cuda.zip
 ```
 
 The portable package includes the application runtime. Testers do **not** need to install Python, create a virtual environment, or run `pip`.
 
 Note: the current test package includes the runtime and application files. Demucs model weights may still be downloaded on first use if they are not already available in the user's model cache.
+
+### CPU vs CUDA Packages
+
+The CPU package is recommended for most testers. It works on a wider range of computers and avoids shipping NVIDIA CUDA libraries.
+
+The CUDA package is optional and intended only for Linux/Windows computers with a compatible NVIDIA GPU and driver stack. It can improve separation performance, but it is larger and is not useful on machines without NVIDIA CUDA support.
+
+macOS uses CPU packages only.
 
 After extracting the ZIP:
 
@@ -215,6 +225,7 @@ Expected result for the current release:
 
 - `v0.1.0`: initial CLI MVP.
 - `v0.3.4`: portable release pipeline, terminal experience for testers, native pickers, Fira Code assets, and cleaner progress output.
+- `v0.3.5`: split CPU and CUDA portable packages.
 
 Full release notes:
 

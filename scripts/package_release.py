@@ -19,6 +19,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--version", required=True)
     parser.add_argument("--platform", default=platform.system().lower())
+    parser.add_argument("--acceleration", choices=("cpu", "cuda"), default="cpu")
     args = parser.parse_args()
 
     root = Path.cwd()
@@ -26,7 +27,7 @@ def main():
     if not dist_app.exists():
         raise SystemExit("dist/AudioStemLab not found. Run PyInstaller first.")
 
-    package_name = f"AudioStemLab-{args.version}-{args.platform}"
+    package_name = f"AudioStemLab-{args.version}-{args.platform}-{args.acceleration}"
     package_dir = root / "release_dist" / package_name
     if package_dir.exists():
         shutil.rmtree(package_dir)
@@ -46,9 +47,12 @@ def main():
             [
                 "RLLABS Audio Stem Lab",
                 f"Version: {args.version}",
+                f"Acceleration package: {args.acceleration.upper()}",
                 "",
                 "This portable package includes the application runtime.",
                 "End users do not need to install Python or activate a virtual environment.",
+                "Use the CPU package for broad compatibility.",
+                "Use the CUDA package only on compatible NVIDIA systems.",
                 "",
                 "How to run:",
                 "- Linux: open launchers/audiostemlab-linux.sh or run AudioStemLab/AudioStemLab.",

@@ -11,18 +11,32 @@ permissions:
 
 jobs:
   build:
-    name: Build ${{ matrix.platform.name }}
+    name: Build ${{ matrix.platform.name }} ${{ matrix.acceleration }}
     runs-on: ${{ matrix.platform.runner }}
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - name: linux
-            runner: ubuntu-latest
-          - name: windows
-            runner: windows-latest
-          - name: macos
-            runner: macos-latest
+        include:
+          - platform:
+              name: linux
+              runner: ubuntu-latest
+            acceleration: cpu
+          - platform:
+              name: linux
+              runner: ubuntu-latest
+            acceleration: cuda
+          - platform:
+              name: windows
+              runner: windows-latest
+            acceleration: cpu
+          - platform:
+              name: windows
+              runner: windows-latest
+            acceleration: cuda
+          - platform:
+              name: macos
+              runner: macos-latest
+            acceleration: cpu
 
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +53,14 @@ jobs:
           sudo apt-get install -y python3-tk ffmpeg
 
       - name: Install Python dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip wheel
+          if [ "${{ matrix.acceleration }}" = "cpu" ]; then
+            python -m pip install -r requirements-cpu.txt
+          else
+            python -m pip install -r requirements-cuda.txt
+          fi
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-build.txt
 
@@ -57,12 +77,12 @@ jobs:
         shell: bash
         run: |
           VERSION="${GITHUB_REF_NAME:-manual}"
-          python scripts/package_release.py --version "$VERSION" --platform "${{ matrix.platform.name }}"
+          python scripts/package_release.py --version "$VERSION" --platform "${{ matrix.platform.name }}" --acceleration "${{ matrix.acceleration }}"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AudioStemLab-${{ github.ref_name }}-${{ matrix.platform.name }}
+          name: AudioStemLab-${{ github.ref_name }}-${{ matrix.platform.name }}-${{ matrix.acceleration }}
           path: release_dist/*.zip
 
   publish:

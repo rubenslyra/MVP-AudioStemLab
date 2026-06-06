@@ -2,6 +2,22 @@
 
 Todas as mudanças relevantes do projeto serão registradas aqui.
 
+## 0.3.5 - Pacotes CPU e CUDA separados
+
+### Adicionado
+
+- `requirements-cpu.txt` para builds portaveis CPU-only.
+- `requirements-cuda.txt` para builds portaveis CUDA.
+- Matriz de release com variantes `cpu` e `cuda`.
+- Nomes de artefatos com aceleracao explicita: `linux-cpu`, `windows-cuda`, etc.
+
+### Alterado
+
+- Versao avancada para `0.3.5`.
+- Pacote CPU passa a ser o recomendado para testadores comuns.
+- Pacote CUDA fica separado e documentado como opcional para computadores Linux/Windows com GPU NVIDIA compativel.
+- macOS fica limitado ao pacote CPU.
+
 ## 0.3.4 - Experiencia de terminal para testes
 
 ### Adicionado
