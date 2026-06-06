@@ -5,7 +5,7 @@
 <h1 align="center">RLLABS Audio Stem Lab</h1>
 
 <p align="center">
-  Separacao local de stems de audio com IA, criada como MVP educacional e base para um aplicativo desktop portavel.
+  Local AI-powered audio stem separation, built as an educational MVP and foundation for a portable desktop application.
 </p>
 
 <p align="center">
@@ -23,60 +23,60 @@
 
 ---
 
-## Visao Geral
+## Overview
 
-O **RLLABS Audio Stem Lab** e uma aplicacao local para separar faixas de audio em stems usando modelos de IA. A versao atual ainda e um MVP de terminal, mas ja foi estruturada para evoluir para um aplicativo desktop instalavel e portavel.
+**RLLABS Audio Stem Lab** is a local application for separating audio tracks into stems using AI models. The current release is still a terminal-based MVP, but the project is already structured to evolve into an installable and portable desktop application.
 
-O projeto prioriza:
+The project prioritizes:
 
-- execucao local;
-- experiencia simples para testadores;
-- organizacao clara de entradas e saidas;
-- compatibilidade futura com Linux, Windows e macOS;
-- cuidado tecnico com os limites reais dos modelos de separacao.
+- local execution;
+- a simple experience for testers;
+- clear input and output organization;
+- future compatibility with Linux, Windows, and macOS;
+- technical care around the real limits of source separation models.
 
-## Estado Da Versao
+## Release Status
 
 | Item | Status |
 | --- | --- |
-| Versao atual | `0.3.4` |
-| Interface | Terminal assistido |
-| Plataformas alvo | Linux, Windows e macOS |
-| Mobile | Ainda nao disponivel |
-| Separador principal | Demucs |
-| Build desktop | Scaffold com PyInstaller |
+| Current version | `0.3.4` |
+| Interface | Assisted terminal |
+| Target platforms | Linux, Windows, and macOS |
+| Mobile | Not available yet |
+| Main separator | Demucs |
+| Desktop build | PyInstaller scaffold |
 
-## Funcionalidades
+## Features
 
-- Separacao local de audio com Demucs.
-- Seletor nativo de arquivo de origem.
-- Seletor nativo de pasta de destino.
-- Terminal estilizado com cabecalho persistente.
-- Mensagens de progresso mais legiveis.
-- Saida em `output_stems/` durante desenvolvimento.
-- Download opcional com `yt-dlp` para materiais autorizados.
-- Fonte Fira Code v6.2 incluida no pacote de assets.
-- Launchers auxiliares para Linux, Windows e macOS.
+- Local audio separation with Demucs.
+- Native file picker for source audio selection.
+- Native folder picker for output destination selection.
+- Styled terminal with persistent system header.
+- Cleaner progress messages for non-technical users.
+- Development output folder: `output_stems/`.
+- Optional `yt-dlp` download flow for authorized material.
+- Fira Code v6.2 bundled as a project asset.
+- Helper launchers for Linux, Windows, and macOS.
 
-## Modos De Separacao
+## Separation Modes
 
-| Modo | Modelo | Stems esperados |
+| Mode | Model | Expected stems |
 | --- | --- | --- |
-| Voz + instrumental | `htdemucs` com `--two-stems vocals` | voz, instrumental |
-| Separacao padrao | `htdemucs` | voz, bateria, baixo, outros |
-| Separacao estendida | `htdemucs_6s` | voz, bateria, baixo, guitarra, piano/teclas, outros |
+| Vocals + instrumental | `htdemucs` with `--two-stems vocals` | vocals, instrumental |
+| Standard separation | `htdemucs` | vocals, drums, bass, other |
+| Extended separation | `htdemucs_6s` | vocals, drums, bass, guitar, piano/keys, other |
 
-### Limites Tecnicos
+### Technical Limits
 
-Sopros, sintetizadores, teclado detalhado, voz principal e backing vocal ainda nao sao stems confiaveis nesta base. Esses casos exigem pesquisa com modelos especializados ou etapas adicionais de classificacao.
+Brass, synthesizers, detailed keyboard layers, lead vocals, and backing vocals are not reliable standalone stems in the current model setup. These cases require specialized models or additional post-processing and classification steps.
 
-## Formatos De Saida
+## Output Formats
 
 - WAV
 - MP3 320 kbps
 - FLAC
 
-## Estrutura Principal
+## Project Structure
 
 ```text
 MVP-AudioStemLab/
@@ -96,9 +96,9 @@ MVP-AudioStemLab/
 └── docs/
 ```
 
-## Instalacao Para Desenvolvimento
+## Development Setup
 
-Use preferencialmente Python `3.10` ou `3.11`.
+Python `3.10` or `3.11` is recommended.
 
 ```bash
 python3 -m venv .venv
@@ -109,9 +109,9 @@ pip install -r requirements-dev.txt
 python app.py
 ```
 
-### Ambiente Isolado Local
+### Local Isolated Environment
 
-Este workspace tambem pode usar o ambiente isolado ja preparado:
+This workspace can also use the prepared isolated environment:
 
 ```bash
 source .venv311/bin/activate
@@ -119,23 +119,23 @@ python --version
 python app.py
 ```
 
-## Uso
+## Usage
 
-1. Execute o aplicativo:
+1. Run the application:
 
 ```bash
 python app.py
 ```
 
-2. Escolha `Separar audio local`.
-3. Selecione o arquivo pelo gerenciador de arquivos do sistema.
-4. Escolha o modo de separacao.
-5. Escolha o formato de saida.
-6. Escolha a pasta de destino ou use `output_stems/`.
+2. Choose `Separate local audio`.
+3. Select the source file using the system file picker.
+4. Choose the separation mode.
+5. Choose the output format.
+6. Select a destination folder or use `output_stems/`.
 
 ## Launchers
 
-Arquivos auxiliares para teste por sistema:
+Helper launchers for platform-specific testing:
 
 ```text
 launchers/audiostemlab-linux.sh
@@ -144,9 +144,9 @@ launchers/audiostemlab-macos.command
 launchers/audiostemlab-windows.bat
 ```
 
-## Build De Executavel
+## Executable Build
 
-O build precisa ser gerado separadamente em cada sistema operacional de destino.
+Builds must be generated separately on each target operating system.
 
 ```bash
 source .venv/bin/activate
@@ -154,32 +154,32 @@ pip install -r requirements-build.txt
 pyinstaller packaging/AudioStemLab.spec
 ```
 
-O binario sera criado em `dist/`.
+The executable will be created in `dist/`.
 
-## Assets De Fonte
+## Font Assets
 
-O projeto inclui Fira Code v6.2 em:
+The project includes Fira Code v6.2 at:
 
 ```text
 assets/fonts/fira-code/ttf/
 ```
 
-A fonte e fornecida sob SIL Open Font License 1.1. A licenca esta em:
+The font is distributed under the SIL Open Font License 1.1. The license is available at:
 
 ```text
 assets/licenses/FIRA_CODE_LICENSE
 ```
 
-A ativacao real da fonte e das ligaduras depende do terminal ou do instalador em cada sistema operacional.
+Actual font and ligature activation depends on the terminal or installer used by each operating system.
 
-## Testes
+## Tests
 
 ```bash
 source .venv311/bin/activate
 python -m pytest -q
 ```
 
-Resultado esperado na versao atual:
+Expected result for the current release:
 
 ```text
 7 passed
@@ -187,24 +187,24 @@ Resultado esperado na versao atual:
 
 ## Releases
 
-- `v0.1.0`: MVP CLI inicial.
-- `v0.3.4`: experiencia de terminal para testadores, seletores nativos, fonte Fira Code e progresso mais legivel.
+- `v0.1.0`: initial CLI MVP.
+- `v0.3.4`: terminal experience for testers, native pickers, Fira Code assets, and cleaner progress output.
 
-Notas completas:
+Full release notes:
 
 ```text
 docs/releases/
 ```
 
-## Roadmap Curto
+## Short Roadmap
 
-- Organizar jobs por musica.
-- Salvar logs de processamento.
-- Melhorar mensagens de erro para usuario comum.
-- Preparar instaladores por sistema operacional.
-- Reduzir peso do runtime com build CPU-only.
-- Evoluir para interface desktop completa.
+- Organize processing jobs by song.
+- Save processing logs.
+- Improve user-facing error messages.
+- Prepare installers for each operating system.
+- Reduce runtime weight with a CPU-only build path.
+- Evolve into a complete desktop interface.
 
-## Licenca
+## License
 
-Este projeto esta sob a licenca MIT. Consulte [LICENSE](LICENSE).
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
