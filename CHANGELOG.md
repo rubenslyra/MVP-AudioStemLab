@@ -2,6 +2,18 @@
 
 Todas as mudanças relevantes do projeto serão registradas aqui.
 
+## 0.3.7 - Assets CUDA divididos no release
+
+### Adicionado
+
+- Divisao automatica de ZIPs acima do limite de 2 GiB do GitHub Release Asset.
+- Documentacao para baixar e reconstruir pacotes CUDA divididos em `*.part-*`.
+
+### Alterado
+
+- Versao avancada para `0.3.7`.
+- Workflow de release passa a publicar pacotes CPU inteiros e pacotes CUDA grandes em partes menores.
+
 ## 0.3.6 - Artefatos de release e snapshots no README
 
 ### Adicionado

@@ -104,4 +104,4 @@ def test_separator_formats_progress_messages(tmp_path):
 
 
 def test_app_version_is_release_version():
-    assert APP_VERSION == "0.3.6"
+    assert APP_VERSION == "0.3.7"
