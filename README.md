@@ -93,6 +93,10 @@ After extracting the ZIP:
 - Helper launchers for Linux, Windows, and macOS.
 - GitHub Actions workflow to build portable packages for the three supported desktop systems.
 
+## Application Snapshots
+
+The tester flow is documented with terminal snapshots in [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md).
+
 ## Separation Modes
 
 | Mode | Model | Expected stems |
