@@ -98,8 +98,21 @@ jobs:
         with:
           path: release_dist
 
+      - name: Split release assets larger than GitHub limit
+        shell: bash
+        run: |
+          find release_dist -name "*.zip" -print0 | while IFS= read -r -d '' file; do
+            size=$(stat -c%s "$file")
+            if [ "$size" -ge 2000000000 ]; then
+              split -b 1900m "$file" "$file.part-"
+              rm "$file"
+            fi
+          done
+
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           body_path: docs/releases/${{ github.ref_name }}.md
-          files: release_dist/**/*.zip
+          files: |
+            release_dist/**/*.zip
+            release_dist/**/*.part-*
