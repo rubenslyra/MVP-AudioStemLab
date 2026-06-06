@@ -8,6 +8,11 @@ datas = []
 binaries = []
 hiddenimports = []
 
+datas += [
+    ("assets/fonts/fira-code/ttf/*.ttf", "assets/fonts/fira-code/ttf"),
+    ("assets/licenses/FIRA_CODE_LICENSE", "assets/licenses"),
+]
+
 for package_name in ("demucs", "torch", "torchaudio"):
     package_datas, package_binaries, package_hiddenimports = collect_all(package_name)
     datas += package_datas

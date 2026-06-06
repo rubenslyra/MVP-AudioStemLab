@@ -2,6 +2,7 @@ from core.paths import AppPaths
 from core.file_manager import FileManager
 from core.separator import AudioSeparator
 from core.terminal_ui import TerminalUI
+from core.version import APP_VERSION
 
 
 def test_file_manager_ensures_directories(tmp_path):
@@ -73,3 +74,34 @@ def test_separator_builds_extended6_flac_command(tmp_path):
     assert "htdemucs_6s" in command
     assert "--flac" in command
     assert "--two-stems" not in command
+
+
+def test_separator_builds_command_with_custom_output_dir(tmp_path):
+    paths = AppPaths(
+        data_dir=tmp_path / "data",
+        cache_dir=tmp_path / "cache",
+        input_dir=tmp_path / "data" / "input_audio",
+        output_dir=tmp_path / "data" / "output_stems",
+        models_dir=tmp_path / "cache" / "models",
+        logs_dir=tmp_path / "data" / "logs",
+        temp_dir=tmp_path / "cache" / "tmp",
+    )
+    separator = AudioSeparator(paths)
+    custom_output = tmp_path / "selected_output"
+
+    command = separator.build_command("song.mp3", "full4", "wav", custom_output)
+
+    assert str(custom_output) in command
+
+
+def test_separator_formats_progress_messages(tmp_path):
+    separator = AudioSeparator()
+
+    message = separator._progress_message(" 50%| 5.85/11.7 [00:13<00:13, 2.28s/seconds]", 0)
+
+    assert "50% concluido" in message
+    assert "tempo decorrido" in message
+
+
+def test_app_version_is_release_version():
+    assert APP_VERSION == "0.3.4"

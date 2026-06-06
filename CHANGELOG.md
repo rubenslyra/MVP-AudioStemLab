@@ -2,6 +2,30 @@
 
 Todas as mudanças relevantes do projeto serão registradas aqui.
 
+## 0.3.4 - Experiencia de terminal para testes
+
+### Adicionado
+
+- UI de terminal com `rich`, paineis, tabelas e prompts mais claros.
+- Limpeza de tela mantendo cabecalho, identidade do sistema e versao.
+- Seletor nativo de arquivo de origem via `tkinter`.
+- Seletor nativo de pasta de destino via `tkinter`.
+- Launchers auxiliares para Linux, Windows e macOS.
+- Fonte Fira Code v6.2 no pacote de assets.
+- Licenca do Fira Code em `assets/licenses/FIRA_CODE_LICENSE`.
+- Mensagens de progresso mais familiares, com percentual inteiro e tempo decorrido.
+
+### Alterado
+
+- Versao avancada para `0.3.4`.
+- O terminal agora informa claramente que a versao de teste e desktop, sem mobile.
+- O subprocesso do Demucs passa a ter saida capturada para reduzir quebras visuais no terminal.
+
+### Observacoes
+
+- A ativacao de ligaduras depende do terminal/instalador de cada sistema operacional.
+- O app CLI prepara a fonte no pacote, mas nao consegue forcar a fonte de um terminal ja aberto pelo usuario.
+
 ## 0.1.0 - MVP CLI
 
 Primeira versão instalável/de desenvolvimento do RLLABS Audio Stem Lab.

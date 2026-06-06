@@ -1,6 +1,7 @@
 from core.terminal_ui import TerminalUI
 from core.separator import AudioSeparator
 from core.file_manager import FileManager
+from core.file_dialogs import FileDialogUnavailable, choose_audio_file, choose_output_folder
 
 
 def main():
@@ -8,57 +9,90 @@ def main():
     manager = FileManager()
     separator = AudioSeparator()
 
-    ui.clear()
-    ui.header()
-
     manager.ensure_directories()
-    ui.info(f"Pasta de entrada: {manager.input_dir}")
-    ui.info(f"Pasta de saida: {manager.output_dir}")
 
     while True:
+        ui.refresh()
+        ui.show_paths(manager.input_dir, manager.output_dir)
         ui.menu()
 
-        option = input("\nEscolha uma opção: ").strip()
+        option = ui.ask("Escolha uma opcao", default="1").strip()
 
         if option == "1":
-            audio_path = input("\nInforme o caminho do arquivo de áudio: ").strip()
+            source_method = ui.choose_audio_source_method()
+            if source_method == "1":
+                try:
+                    selected = choose_audio_file(manager.input_dir)
+                    if not selected:
+                        ui.warning("Nenhum arquivo selecionado.")
+                        ui.wait()
+                        continue
+                    audio_path = str(selected)
+                except FileDialogUnavailable as error:
+                    ui.warning(str(error))
+                    audio_path = ui.ask("Informe o caminho do arquivo de audio").strip()
+            else:
+                audio_path = ui.ask("Informe o caminho do arquivo de audio").strip()
 
             if not manager.file_exists(audio_path):
                 ui.error("Arquivo não encontrado.")
+                ui.wait()
                 continue
 
             mode = ui.choose_separation_mode()
             output_format = ui.choose_output_format()
+            output_dir = manager.output_dir
+
+            if ui.choose_destination_method() == "2":
+                try:
+                    selected_dir = choose_output_folder(manager.output_dir)
+                    if selected_dir:
+                        output_dir = selected_dir
+                    else:
+                        ui.warning("Nenhuma pasta selecionada. Usando a pasta padrao.")
+                except FileDialogUnavailable as error:
+                    ui.warning(str(error))
+                    output_dir = ui.ask("Informe a pasta de destino", default=str(manager.output_dir)).strip()
 
             ui.info("Iniciando separação. Em computadores mais simples, isso pode demorar.")
 
             try:
-                separator.separate(audio_path, mode, output_format)
-                ui.success(f"Separação concluída. Verifique a pasta {manager.output_dir}")
+                last_message = {"value": None}
+
+                def show_progress(message):
+                    if message and message != last_message["value"]:
+                        last_message["value"] = message
+                        ui.info(message)
+
+                separator.separate(audio_path, mode, output_format, output_dir, show_progress)
+                ui.success(f"Separação concluída. Verifique a pasta {output_dir}")
             except Exception as error:
                 ui.error(f"Ocorreu um erro: {error}")
+            ui.wait()
 
         elif option == "2":
             ui.info("Use apenas arquivos próprios, autorizados, Creative Commons ou domínio público.")
-            url = input("\nURL do áudio/vídeo autorizado: ").strip()
+            url = ui.ask("URL do audio/video autorizado").strip()
 
             try:
                 manager.download_audio(url)
                 ui.success(f"Download concluído. Verifique a pasta {manager.input_dir}")
             except Exception as error:
                 ui.error(f"Erro no download: {error}")
+            ui.wait()
 
         elif option == "3":
             ui.about()
+            ui.wait()
 
         elif option == "0":
-            confirm = input("\nDeseja realmente sair? [s/n]: ").strip().lower()
-            if confirm == "s":
+            if ui.confirm("Deseja realmente sair?"):
                 ui.goodbye()
                 break
 
         else:
             ui.error("Opção inválida.")
+            ui.wait()
 
 
 if __name__ == "__main__":

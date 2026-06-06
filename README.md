@@ -1,5 +1,7 @@
 # RLLABS Audio Stem Lab
 
+Versao atual: `0.3.4`
+
 Projeto educacional (MVP) para separar stems de áudio localmente usando Demucs.
 
 ## Instalação para desenvolvimento
@@ -44,6 +46,12 @@ Sopros, sintetizadores, teclado detalhado, voz principal e backing vocal ainda n
 - WAV
 - MP3 320 kbps
 - FLAC
+
+## Experiencia de teste
+
+Esta versao e desktop-only: Linux, Windows e macOS. Mobile ainda nao esta disponivel.
+
+O app usa um terminal dedicado/launcher quando empacotado e oferece seletores nativos para arquivo de origem e pasta de destino. A fonte Fira Code v6.2 esta incluida em `assets/fonts/fira-code/ttf/`; a ativacao de ligaduras depende do terminal ou instalador de cada sistema.
 
 ## Build de executável
 
