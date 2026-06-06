@@ -5,7 +5,7 @@
 <h1 align="center">RLLABS Audio Stem Lab</h1>
 
 <p align="center">
-  Local AI-powered audio stem separation, built as an educational MVP and foundation for a portable desktop application.
+  Local AI-powered audio stem separation packaged for desktop testers.
 </p>
 
 <p align="center">
@@ -44,7 +44,31 @@ The project prioritizes:
 | Target platforms | Linux, Windows, and macOS |
 | Mobile | Not available yet |
 | Main separator | Demucs |
-| Desktop build | PyInstaller scaffold |
+| Desktop build | Portable PyInstaller packages |
+
+## Download For Testers
+
+End users should download the ready-to-run package for their operating system from the project release page.
+
+The release packages are generated as:
+
+```text
+AudioStemLab-v0.3.4-linux.zip
+AudioStemLab-v0.3.4-windows.zip
+AudioStemLab-v0.3.4-macos.zip
+```
+
+The portable package includes the application runtime. Testers do **not** need to install Python, create a virtual environment, or run `pip`.
+
+Note: the current test package includes the runtime and application files. Demucs model weights may still be downloaded on first use if they are not already available in the user's model cache.
+
+After extracting the ZIP:
+
+| System | Recommended launcher |
+| --- | --- |
+| Linux | `launchers/audiostemlab-linux.sh` |
+| Windows | `launchers/audiostemlab-windows.bat` |
+| macOS | `launchers/audiostemlab-macos.command` |
 
 ## Features
 
@@ -57,6 +81,7 @@ The project prioritizes:
 - Optional `yt-dlp` download flow for authorized material.
 - Fira Code v6.2 bundled as a project asset.
 - Helper launchers for Linux, Windows, and macOS.
+- GitHub Actions workflow to build portable packages for the three supported desktop systems.
 
 ## Separation Modes
 
@@ -96,9 +121,22 @@ MVP-AudioStemLab/
 └── docs/
 ```
 
+## User Usage
+
+1. Download the ZIP for your operating system.
+2. Extract it to a local folder.
+3. Open the matching launcher for Linux, Windows, or macOS.
+4. Choose `Separate local audio`.
+5. Select the source file using the system file picker.
+6. Choose the separation mode.
+7. Choose the output format.
+8. Select a destination folder or use `output_stems/`.
+
 ## Development Setup
 
-Python `3.10` or `3.11` is recommended.
+This section is for contributors only. It is not required for end users.
+
+Python `3.10` or `3.11` is recommended for development.
 
 ```bash
 python3 -m venv .venv
@@ -109,7 +147,7 @@ pip install -r requirements-dev.txt
 python app.py
 ```
 
-### Local Isolated Environment
+### Local Isolated Environment For Contributors
 
 This workspace can also use the prepared isolated environment:
 
@@ -118,20 +156,6 @@ source .venv311/bin/activate
 python --version
 python app.py
 ```
-
-## Usage
-
-1. Run the application:
-
-```bash
-python app.py
-```
-
-2. Choose `Separate local audio`.
-3. Select the source file using the system file picker.
-4. Choose the separation mode.
-5. Choose the output format.
-6. Select a destination folder or use `output_stems/`.
 
 ## Launchers
 
@@ -144,9 +168,11 @@ launchers/audiostemlab-macos.command
 launchers/audiostemlab-windows.bat
 ```
 
-## Executable Build
+## Portable Build
 
-Builds must be generated separately on each target operating system.
+Portable release packages are built by GitHub Actions whenever a `v*` tag is pushed.
+
+Manual local build for contributors:
 
 ```bash
 source .venv/bin/activate
@@ -154,7 +180,7 @@ pip install -r requirements-build.txt
 pyinstaller packaging/AudioStemLab.spec
 ```
 
-The executable will be created in `dist/`.
+The PyInstaller output is created in `dist/`. Release ZIPs are assembled in `release_dist/` by `scripts/package_release.py`.
 
 ## Font Assets
 
@@ -188,7 +214,7 @@ Expected result for the current release:
 ## Releases
 
 - `v0.1.0`: initial CLI MVP.
-- `v0.3.4`: terminal experience for testers, native pickers, Fira Code assets, and cleaner progress output.
+- `v0.3.4`: portable release pipeline, terminal experience for testers, native pickers, Fira Code assets, and cleaner progress output.
 
 Full release notes:
 
@@ -198,12 +224,19 @@ docs/releases/
 
 ## Short Roadmap
 
+- Bundle or prefetch Demucs model weights for a more offline-friendly first run.
 - Organize processing jobs by song.
 - Save processing logs.
 - Improve user-facing error messages.
 - Prepare installers for each operating system.
 - Reduce runtime weight with a CPU-only build path.
 - Evolve into a complete desktop interface.
+
+## About Rubens Lyra Labs
+
+Rubens Lyra Labs produces applied technical content for developers and technology professionals, covering C#, .NET, ASP.NET Core, React, TypeScript, data analysis, applied artificial intelligence, automation, and software architecture.
+
+Website: [rubinholyra.com.br](https://rubinholyra.com.br/)
 
 ## License
 

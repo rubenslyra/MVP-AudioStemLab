@@ -6,6 +6,8 @@ Todas as mudanças relevantes do projeto serão registradas aqui.
 
 ### Adicionado
 
+- Pipeline de release para gerar pacotes portaveis Linux, Windows e macOS em tags `v*`.
+- Script de empacotamento `scripts/package_release.py`.
 - UI de terminal com `rich`, paineis, tabelas e prompts mais claros.
 - Limpeza de tela mantendo cabecalho, identidade do sistema e versao.
 - Seletor nativo de arquivo de origem via `tkinter`.
@@ -18,6 +20,8 @@ Todas as mudanças relevantes do projeto serão registradas aqui.
 ### Alterado
 
 - Versao avancada para `0.3.4`.
+- README reposicionado para usuarios finais baixarem pacotes prontos, sem instalar Python.
+- Spec do PyInstaller ajustado para gerar pacote portavel em diretorio e incluir assets/documentacao.
 - O terminal agora informa claramente que a versao de teste e desktop, sem mobile.
 - O subprocesso do Demucs passa a ter saida capturada para reduzir quebras visuais no terminal.
 
