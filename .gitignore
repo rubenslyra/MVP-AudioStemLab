@@ -1,0 +1,11 @@
+.venv/
+.venv311/
+.python/
+__pycache__/
+input_audio/*
+!input_audio/coloque_aqui_suas_musicas_autorizadas.txt
+output_stems/
+.cache/
+build/
+dist/
+.pytest_cache/
