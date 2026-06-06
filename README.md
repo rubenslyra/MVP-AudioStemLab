@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.3.5-0f766e?style=for-the-badge">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.3.6-0f766e?style=for-the-badge">
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%20%7C%203.11-1f2937?style=for-the-badge&logo=python&logoColor=white">
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-334155?style=for-the-badge">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-111827?style=for-the-badge">
@@ -39,7 +39,7 @@ The project prioritizes:
 
 | Item | Status |
 | --- | --- |
-| Current version | `0.3.5` |
+| Current version | `0.3.6` |
 | Interface | Assisted terminal |
 | Target platforms | Linux, Windows, and macOS |
 | Mobile | Not available yet |
@@ -53,11 +53,11 @@ End users should download the ready-to-run package for their operating system fr
 The release packages are generated as:
 
 ```text
-AudioStemLab-v0.3.5-linux-cpu.zip
-AudioStemLab-v0.3.5-windows-cpu.zip
-AudioStemLab-v0.3.5-macos-cpu.zip
-AudioStemLab-v0.3.5-linux-cuda.zip
-AudioStemLab-v0.3.5-windows-cuda.zip
+AudioStemLab-v0.3.6-linux-cpu.zip
+AudioStemLab-v0.3.6-windows-cpu.zip
+AudioStemLab-v0.3.6-macos-cpu.zip
+AudioStemLab-v0.3.6-linux-cuda.zip
+AudioStemLab-v0.3.6-windows-cuda.zip
 ```
 
 The portable package includes the application runtime. Testers do **not** need to install Python, create a virtual environment, or run `pip`.
@@ -242,6 +242,7 @@ Expected result for the current release:
 - `v0.1.0`: initial CLI MVP.
 - `v0.3.4`: portable release pipeline, terminal experience for testers, native pickers, Fira Code assets, and cleaner progress output.
 - `v0.3.5`: split CPU and CUDA portable packages.
+- `v0.3.6`: README snapshots visible on the release branch and ready-to-download release artifacts.
 
 Full release notes:
 

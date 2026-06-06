@@ -2,6 +2,18 @@
 
 Todas as mudanças relevantes do projeto serão registradas aqui.
 
+## 0.3.6 - Artefatos de release e snapshots no README
+
+### Adicionado
+
+- Snapshots de uso incorporados diretamente ao README principal.
+- Notas de release para publicacao dos artefatos portaveis `v0.3.6`.
+
+### Alterado
+
+- Versao avancada para `0.3.6`.
+- README e documentacao de empacotamento atualizados para os nomes dos pacotes `v0.3.6`.
+
 ## 0.3.5 - Pacotes CPU e CUDA separados
 
 ### Adicionado
