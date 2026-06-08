@@ -1,5 +1,6 @@
-import subprocess
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 from core.paths import AppPaths
@@ -21,18 +22,45 @@ class FileManager:
     def file_exists(self, path):
         return Path(path).is_file()
 
-    def download_audio(self, url):
-        if shutil.which("yt-dlp") is None:
-            raise MissingDependencyError("yt-dlp nao encontrado no ambiente do aplicativo.")
+    def build_download_command(self, url, output_dir=None):
+        target_dir = Path(output_dir) if output_dir else self.input_dir
+        output_template = str(target_dir / "%(title)s.%(ext)s")
 
-        command = [
-            "yt-dlp",
-            "-x",
-            "--audio-format",
-            "mp3",
-            "-o",
-            str(self.input_dir / "%(title)s.%(ext)s"),
-            url,
-        ]
+        try:
+            import yt_dlp  # noqa: F401
+
+            return [
+                sys.executable,
+                "-m",
+                "yt_dlp",
+                "-x",
+                "--audio-format",
+                "mp3",
+                "-o",
+                output_template,
+                url,
+            ]
+        except ImportError:
+            executable = shutil.which("yt-dlp")
+            if executable:
+                return [
+                    executable,
+                    "-x",
+                    "--audio-format",
+                    "mp3",
+                    "-o",
+                    output_template,
+                    url,
+                ]
+
+        raise MissingDependencyError(
+            "download indisponivel neste pacote: yt-dlp nao foi incluido no ambiente do aplicativo."
+        )
+
+    def download_audio(self, url, output_dir=None):
+        target_dir = Path(output_dir) if output_dir else self.input_dir
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+        command = self.build_download_command(url, target_dir)
 
         subprocess.run(command, check=True)

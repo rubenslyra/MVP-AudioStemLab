@@ -26,7 +26,7 @@ datas += [
     (str(ROOT / "assets" / "licenses" / "FIRA_CODE_LICENSE"), "assets/licenses"),
 ]
 
-for package_name in ("demucs", "torch", "torchaudio", "torchcodec"):
+for package_name in ("demucs", "torch", "torchaudio", "torchcodec", "yt_dlp"):
     package_datas, package_binaries, package_hiddenimports = collect_all(package_name)
     datas += package_datas
     binaries += package_binaries

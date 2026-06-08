@@ -2,6 +2,22 @@
 
 Todas as mudanças relevantes do projeto serão registradas aqui.
 
+## 0.3.8 - Correcoes de experiencia do pacote portavel
+
+### Corrigido
+
+- Launchers portaveis passam a abrir o executavel PyInstaller dentro do ZIP em vez de procurar `app.py`.
+- `yt-dlp` passa a ser incluido no build PyInstaller e chamado como modulo Python do ambiente empacotado.
+- Tela inicial deixa de exibir caminhos internos antes de o usuario escolher arquivo ou pasta.
+- Limpeza de tela passa a limpar tambem o historico visivel do terminal quando suportado.
+- Encerramento remove a contagem regressiva e nao deixa texto residual do aplicativo no terminal.
+- Arquivo `.desktop` Linux passa a apontar corretamente para o launcher do pacote e fica executavel.
+
+### Alterado
+
+- Fluxo de download agora pede a pasta de destino antes de salvar o audio autorizado.
+- Versao avancada para `0.3.8`.
+
 ## 0.3.7 - Assets CUDA divididos no release
 
 ### Adicionado

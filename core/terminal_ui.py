@@ -1,6 +1,3 @@
-import os
-import time
-
 from rich import box
 from rich.console import Console
 from rich.panel import Panel
@@ -16,7 +13,11 @@ class TerminalUI:
         self.console = Console()
 
     def clear(self):
-        self.console.clear()
+        if self.console.is_terminal:
+            self.console.file.write("\033[H\033[2J\033[3J")
+            self.console.file.flush()
+        else:
+            self.console.clear()
 
     def header(self):
         profile = terminal_profile_summary()
@@ -108,6 +109,12 @@ class TerminalUI:
         self.console.print("[cyan]2[/cyan] Escolher outra pasta")
         return self.ask("Escolha a pasta de destino", default="1").strip()
 
+    def choose_download_destination_method(self):
+        self.console.print("\n[bold]Pasta para salvar o download[/bold]")
+        self.console.print("[cyan]1[/cyan] Usar pasta padrao do aplicativo")
+        self.console.print("[cyan]2[/cyan] Escolher outra pasta")
+        return self.ask("Escolha a pasta do download", default="1").strip()
+
     def info(self, message):
         self.console.print(f"\n[cyan]INFO[/cyan] {message}")
 
@@ -138,8 +145,4 @@ class TerminalUI:
         )
 
     def goodbye(self):
-        self.console.print("\nEncerrando o laboratorio...")
-        for number in range(3, 0, -1):
-            self.console.print(f"Fechando em {number}...")
-            time.sleep(1)
-        self.console.print("Programa finalizado com seguranca.")
+        self.clear()

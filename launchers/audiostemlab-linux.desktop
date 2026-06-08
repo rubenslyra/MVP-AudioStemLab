@@ -2,6 +2,6 @@
 Type=Application
 Name=RLLABS Audio Stem Lab
 Comment=Separacao local de stems por IA
-Exec=sh -c 'cd "$(dirname "$0")/.." && ./launchers/audiostemlab-linux.sh'
+Exec=sh -c 'cd "$(dirname "$1")/.." && ./launchers/audiostemlab-linux.sh' audiostemlab %k
 Terminal=true
 Categories=Audio;AudioVideo;

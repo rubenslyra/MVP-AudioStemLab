@@ -13,12 +13,12 @@ def main():
 
     while True:
         ui.refresh()
-        ui.show_paths(manager.input_dir, manager.output_dir)
         ui.menu()
 
         option = ui.ask("Escolha uma opcao", default="1").strip()
 
         if option == "1":
+            ui.refresh()
             source_method = ui.choose_audio_source_method()
             if source_method == "1":
                 try:
@@ -39,13 +39,17 @@ def main():
                 ui.wait()
                 continue
 
+            ui.refresh()
             mode = ui.choose_separation_mode()
             output_format = ui.choose_output_format()
             output_dir = manager.output_dir
 
             if ui.choose_destination_method() == "2":
                 try:
-                    selected_dir = choose_output_folder(manager.output_dir)
+                    selected_dir = choose_output_folder(
+                        manager.output_dir,
+                        title="Escolha a pasta de destino dos stems",
+                    )
                     if selected_dir:
                         output_dir = selected_dir
                     else:
@@ -54,7 +58,10 @@ def main():
                     ui.warning(str(error))
                     output_dir = ui.ask("Informe a pasta de destino", default=str(manager.output_dir)).strip()
 
+            ui.refresh()
             ui.info("Iniciando separação. Em computadores mais simples, isso pode demorar.")
+            ui.info(f"Arquivo de origem: {audio_path}")
+            ui.info(f"Pasta de destino: {output_dir}")
 
             try:
                 last_message = {"value": None}
@@ -71,17 +78,36 @@ def main():
             ui.wait()
 
         elif option == "2":
+            ui.refresh()
             ui.info("Use apenas arquivos próprios, autorizados, Creative Commons ou domínio público.")
             url = ui.ask("URL do audio/video autorizado").strip()
+            download_dir = manager.input_dir
+
+            if ui.choose_download_destination_method() == "2":
+                try:
+                    selected_dir = choose_output_folder(
+                        manager.input_dir,
+                        title="Escolha a pasta para salvar o download",
+                    )
+                    if selected_dir:
+                        download_dir = selected_dir
+                    else:
+                        ui.warning("Nenhuma pasta selecionada. Usando a pasta padrao do aplicativo.")
+                except FileDialogUnavailable as error:
+                    ui.warning(str(error))
+                    download_dir = ui.ask("Informe a pasta para salvar o download", default=str(manager.input_dir)).strip()
 
             try:
-                manager.download_audio(url)
-                ui.success(f"Download concluído. Verifique a pasta {manager.input_dir}")
+                ui.refresh()
+                ui.info(f"Baixando audio autorizado em: {download_dir}")
+                manager.download_audio(url, download_dir)
+                ui.success(f"Download concluído. Verifique a pasta {download_dir}")
             except Exception as error:
                 ui.error(f"Erro no download: {error}")
             ui.wait()
 
         elif option == "3":
+            ui.refresh()
             ui.about()
             ui.wait()
 

@@ -40,14 +40,14 @@ def choose_audio_file(initial_dir):
     return Path(selected) if selected else None
 
 
-def choose_output_folder(initial_dir):
+def choose_output_folder(initial_dir, title="Escolha a pasta de destino dos stems"):
     root = _tk_root()
     from tkinter import filedialog
 
     try:
         selected = filedialog.askdirectory(
             parent=root,
-            title="Escolha a pasta de destino dos stems",
+            title=title,
             initialdir=str(initial_dir),
             mustexist=False,
         )
